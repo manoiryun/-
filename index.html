@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			@-webkit-keyframes open{
+				0%
+				{
+					-webkit-transform:rotateX(-120deg);
+				}
+				40%
+				{
+					-webkit-transform:rotateX(30deg);
+				}
+				60%
+				{
+					-webkit-transform:rotateX(-30deg);
+				}
+				80%
+				{
+					-webkit-transform:rotateX(10deg);
+				}
+				100%
+				{
+					-webkit-transform:rotateX(0deg);
+				}
+			}
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			h2{
+				width:300px;
+				height:50px;
+				font:24px/50px "微软雅黑";
+				text-align: center;
+				background: #f03;
+				color:#fff;
+				z-index: 100;
+				position: absolute;
+				top:-18px;
+			}
+			#wrap {
+				width: 300px;
+				margin: 30px auto;
+				-webkit-perspective: 800px;
+				position: relative;
+			}
+			#wrap .open{
+				-webkit-animation: open 1.5s;
+				-webkit-transform:rotateX(0deg);
+			}
+			#wrap div {
+				position: absolute;
+				top: 32px;
+				left: 0;
+				-webkit-transform-style: preserve-3d;
+				-webkit-transform:rotateX(-120deg);
+				-webkit-transform-origin: top;
+				transition: .5s;
+			}
+			#wrap .open>span{
+				box-shadow: inset 0 0 35px 10px rgba(0,0,0,1);
+			}
+			#wrap span {
+				display: block;
+				width: 298px;
+				height: 30px;
+				line-height: 30px;
+				border: 1px solid mediumpurple;
+				font: 16px/30px "宋体";
+				background: skyblue;
+				text-indent: 15px;
+				transition: 0.5s;
+				color:#fff;
+				box-shadow: inset 0 0 15px 5px rgba(0,0,0,1);
+			}
+			#wrap span:hover{
+				background: darkorange;
+				text-indent: 30px;
+			}
+			button {
+				padding: 5px 3px;
+				margin: 5px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var timer = null;
+				var oDiv = document.getElementById('wrap');
+				var aDiv = oDiv.getElementsByTagName('div');
+				var oBtn = document.getElementsByTagName('button');
+				oBtn[1].onclick = function() {
+					var i = aDiv.length-1;
+					timer = setInterval(function(){
+						if(i<0){
+							clearInterval(timer);
+						}else{
+							aDiv[i].className = '';
+							i--;
+						}
+						
+					},100)
+				}
+				oBtn[0].onclick = function() {
+					var i = 0;
+					clearInterval(timer)
+					timer = setInterval(function(){
+						if(i>=aDiv.length){
+							clearInterval(timer);
+						}else{
+							aDiv[i].className = 'open';
+							i++;
+						}
+						
+					},100)
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<button>展开</button>
+		<button>收缩</button>
+		<div id='wrap'>
+			<h2>标题</h2>
+			<div>
+				<span>第一项</span>
+				<div>
+					<span>第二项</span>
+					<div>
+						<span>第三项</span>
+						<div>
+							<span>第四项</span>
+							<div>
+								<span>第五项</span>
+								<div>
+									<span>第六项</span>
+									<div>
+										<span>第七项</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
